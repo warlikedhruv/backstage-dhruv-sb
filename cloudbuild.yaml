@@ -1,3 +1,24 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-east1-docker.pkg.dev/dhruv-development/REPOSITORY/IMAGE_NAME', '.' ]
+  
+
+  - id: 'Build Backstage container'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker build --build-arg "POSTGRES_HOST=${_POSTGRES_HOST}" --build-arg "POSTGRES_PORT=${_POSTGRES_PORT}" --build-arg "POSTGRES_PASSWORD=${_POSTGRES_PASSWORD}" -t ${_IMAGE_NAME} .']
+
+  - id: 'Generate tag'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker tag ${_IMAGE_NAME} us-east1-docker.pkg.dev/dhruv-development/backstage-dhruv-development/backstage:latest']
+
+  - id: 'Push tag'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker push us-east1-docker.pkg.dev/dhruv-development/backstage-dhruv-development/backstage:latest']
+
+
+timeout: 1200s
+tags: ['backstage']
+substitutions:
+  _IMAGE_NAME: 'backstage-dhruv-development'
+logsBucket: '${_LOG_BUCKET}'
