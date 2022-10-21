@@ -18,6 +18,7 @@ steps:
 
 
 timeout: 1200s
+logsBucket: ${_LOG_BUCKET}
 tags: ['backstage']
 substitutions:
   _IMAGE_NAME: 'backstage-dhruv-development'
