@@ -1,7 +1,7 @@
 steps:
   - id: 'Build Back stage'
     name: 'node:16-alpine3.15'
-    entrypoint: 'bash'
+    entrypoint: '/bin/bash'
     args:
       - '-c'
       - |-
