@@ -1,6 +1,14 @@
 steps:
+  - id: 'Build Back stage'
+    name: 'node:16-alpine3.15'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |-
+        yarn install --frozen-lockfile
+        yarn tsc
+        yarn build
   
-
   - id: 'Build Backstage container'
     name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
