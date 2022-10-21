@@ -4,7 +4,7 @@ steps:
   - id: 'Build Backstage container'
     name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
-    args: ['-c', 'docker build --build-arg "POSTGRES_HOST=${_POSTGRES_HOST}" --build-arg "POSTGRES_PORT=${_POSTGRES_PORT}" --build-arg "POSTGRES_PASSWORD=${_POSTGRES_PASSWORD}" -t ${_IMAGE_NAME} .']
+    args: ['-c', 'docker build --build-arg "POSTGRES_HOST=${_POSTGRES_HOST}" --build-arg "POSTGRES_PORT=${_POSTGRES_PORT}" --build-arg "POSTGRES_PASSWORD=${_POSTGRES_PASSWORD}" -t ${_IMAGE_NAME} -f packages/backend/Dockerfile .']
 
   - id: 'Generate tag'
     name: 'gcr.io/cloud-builders/docker'
