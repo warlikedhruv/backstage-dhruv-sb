@@ -1,7 +1,7 @@
 steps:
   - id: 'Build Back stage'
-    name: 'node:16-alpine3.15'
-    entrypoint: '/bin/bash'
+    name: 'gcr.io/cloud-builders/yarn'
+    entrypoint: 'bash'
     args:
       - '-c'
       - |-
